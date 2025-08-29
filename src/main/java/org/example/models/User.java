@@ -2,7 +2,7 @@ package org.example.models;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -17,13 +17,13 @@ public class User {
 
     private int age;
 
-    private Date created_at;
+    private LocalDateTime created_at = LocalDateTime.now();
 
-    public User(String email, String name, int age, Date created_at) {
+    public User(String email, String name, int age) {
         this.email = email;
         this.name = name;
         this.age = age;
-        this.created_at = created_at;
+        this.created_at = LocalDateTime.now();
     }
 
     public User() {
@@ -61,11 +61,15 @@ public class User {
         this.age = age;
     }
 
-    public Date getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
+    }
+
+    public String toString(){
+        return getId() + " " + getName() + " " + getAge() + " " + getEmail() + " " + getCreated_at();
     }
 }
