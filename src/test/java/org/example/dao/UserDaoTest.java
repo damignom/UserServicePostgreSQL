@@ -1,5 +1,5 @@
-import jakarta.persistence.Table;
-import org.example.dao.UserDAO;
+package org.example.dao;
+
 import org.example.models.User;
 import org.example.utils.HibernateUtil;
 import org.hibernate.SessionFactory;
