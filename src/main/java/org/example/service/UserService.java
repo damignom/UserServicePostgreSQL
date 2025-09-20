@@ -1,6 +1,5 @@
 package org.example.service;
 
-import org.example.dao.UserDAO;
 import org.example.dtos.UserDTO;
 import org.example.mappers.UserMapper;
 import org.example.models.User;
@@ -53,6 +52,5 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
-
 
 }
