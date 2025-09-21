@@ -13,6 +13,6 @@ public class KafkaProducerService {
 
     public void sendUserEvent(String operation, String email) {
         String message = operation + ":" + email;
-        kafkaTemplate.send("user-events", message);
+        kafkaTemplate.send("user-event", message);
     }
 }
