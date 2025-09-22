@@ -13,9 +13,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final KafkaProducerService kafkaProducerService;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, KafkaProducerService kafkaProducerService) {
         this.userRepository = userRepository;
+        this.kafkaProducerService = kafkaProducerService;
     }
 
     public List<UserDTO> getAllUsers(){
@@ -34,6 +36,9 @@ public class UserService {
             throw new IllegalArgumentException("Возраст не может быть отрицательным");
         }
         User savedUser = userRepository.save(UserMapper.toEntity(userDTO));
+
+        kafkaProducerService.sendUserEvent("CREATE", savedUser.getEmail());
+
         return UserMapper.toDTO(savedUser);
     }
 
@@ -50,7 +55,11 @@ public class UserService {
 
     @Transactional
     public void deleteUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+
         userRepository.deleteById(id);
+        kafkaProducerService.sendUserEvent("DELETE", user.getEmail());
     }
 
 }
