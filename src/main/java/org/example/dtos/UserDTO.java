@@ -4,14 +4,20 @@ import java.time.LocalDateTime;
 
 public class UserDTO {
 
+    private Long id;
     private String name;
     private String email;
     private int age;
 
-    public UserDTO(int id, String name, String email, int age, LocalDateTime createdAt) {
+    public UserDTO(long id, String name, String email, int age, LocalDateTime createdAt) {
+        this.id = id;
         this.email = email;
         this.age = age;
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
