@@ -26,7 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     @Operation(summary = "Получить список всех пользователей")
     public CollectionModel<EntityModel<UserDTO>> getAllUsers() {
         List<EntityModel<UserDTO>> users = userService.getAllUsers().stream()
